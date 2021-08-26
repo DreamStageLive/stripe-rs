@@ -500,6 +500,8 @@ pub struct PaymentIntentConfirmParams<'a> {
     pub shipping: Option<Shipping>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub source: Option<&'a str>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payment_method: Option<&'a str>,
 }
 
 /// The set of parameters that can be used when capturing a payment_intent object.
