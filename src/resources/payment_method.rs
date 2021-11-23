@@ -76,15 +76,6 @@ impl PaymentMethod {
         client.post_form("/payment_methods", &params)
     }
 
-    /// Detaches a PaymentMethod object.
-    pub fn detach(
-        client: &Client,
-        id: &PaymentMethodId,
-        params: DetachPaymentMethod<'_>,
-    ) -> Response<PaymentMethod> {
-        client.post_form(&format!("/payment_methods/{}/detach", id), &params)
-    }
-
     /// Retrieves a PaymentMethod object.
     pub fn retrieve(
         client: &Client,
@@ -441,18 +432,6 @@ impl<'a> CreatePaymentMethod<'a> {
     }
 }
 
-/// The parameters for `PaymentMethod::detach`.
-#[derive(Clone, Debug, Serialize, Default)]
-pub struct DetachPaymentMethod<'a> {
-    /// Specifies which fields in the response should be expanded.
-    #[serde(skip_serializing_if = "Expand::is_empty")]
-    pub expand: &'a [&'a str],
-}
-impl<'a> DetachPaymentMethod<'a> {
-    pub fn new() -> Self {
-        DetachPaymentMethod { expand: Default::default() }
-    }
-}
 
 /// The parameters for `PaymentMethod::list`.
 #[derive(Clone, Debug, Serialize)]

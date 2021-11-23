@@ -243,7 +243,7 @@ impl<T: Paginate + DeserializeOwned + Send + 'static> List<T> {
 
             // We're on the last value of this page, but there's more. We need to fetch the next page.
             let last_id = val.cursor();
-            let resp = List::get_next(&client, &list.url, last_id.as_ref(), list.params.as_deref());
+            let resp = List::get_next(&client, &list.url, last_id.as_ref());
 
             match resp.await {
                 Ok(mut next_list) => {
